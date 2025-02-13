@@ -100,7 +100,6 @@ one(Interval(2.0,3.3))
 # series of `exp`. We begin with `+`. 
 
 function +(X::Interval, Y::Interval)
-    ## DEMO
     a,b,c,d = promote(X.a, X.b, Y.a, Y.b) # make sure all are the same type
     T = typeof(a)
     α = setrounding(T, RoundDown) do
@@ -110,8 +109,6 @@ function +(X::Interval, Y::Interval)
         b + d
     end
     Interval(α, β)
-
-    ## END
 end
 
 
@@ -282,7 +279,6 @@ end
 # $$
 # We avoid using `factorial` to avoid underflow/overflow.
 
-## DEMO
 function exp_t(x, n)
     ret = one(x)
     s = one(x)
@@ -294,14 +290,12 @@ function exp_t(x, n)
 end
 
 exp_t(X, 100) # Taylor series with interval arithmetic
-## END
 
 
 # In the notes we derived a bound assuming $0 ≤ x ≤ 1$
 # on the error in Taylor series of the form $|δ_{x,n}| ≤ 3/(n+1)!$.
 # Here we incorporate that error to get a rigorous bound.
 
-## DEMO
 function exp_bound(X::Interval, n)
     a,b = promote(X.a, X.b)
     T = typeof(a)
@@ -321,30 +315,25 @@ function exp_bound(X::Interval, n)
 end
 
 E = exp_bound(Interval(1.0), 20)
-## END
 
 # Here we test that the bounds match our expectations:
 
-## DEMO
 @test exp(big(1)) in E
 @test E.b - E.a ≤ 1E-13 # we want our bounds to be sharp
-## END
 
 # We can even use the code with `BigFloat` to compute a rigorous bound on the first
 # 1000 digits of `ℯ`:
 
-## DEMO
+
 e_int_big = setprecision(4_000) do
     exp_bound(Interval(big(1.0)), 1000)
 end
-## END
 
 # Our tests show that this has computed more than 1000 digits:
 
-## DEMO
 @test ℯ in e_int_big # we contain ℯ
 @test e_int_big.b - e_int_big.a ≤ big(10.0)^(-1200) # with 1200 digits of accuracy!
-## END
+
 
 
 # ------
@@ -441,20 +430,16 @@ S = sin_bound(Interval(1.0), 20)
 # This also works for matrices: `zeros(Int, 10, 5)` creates a 10 × 5 matrix of all zeros,
 # and `[k^2 + j for k=1:3, j=1:4]` creates the following:
 
-## DEMO
 [k^2 + j for k=1:3, j=1:4] # k is the row, j is the column
-## END
 
 # Note sometimes it is best to create a vector/matrix and populate it. For example, the
 # previous matrix could also been constructed as follows:
 
-## DEMO
 A = zeros(Int, 3, 4) # create a 3 × 4 matrix whose entries are 0 (as Ints)
 for k = 1:3, j = 1:4
     A[k,j] = k^2 + j # set the entries of A
 end
 A
-## END
 
 # **Remark** Julia uses 1-based indexing where the first index of a vector/matrix
 # is 1. This is standard in all mathematical programming languages (Fortran, Maple, Matlab, Mathematica)
@@ -466,10 +451,8 @@ A
 # type. It will attempt to convert an assignment to the right type but will throw
 # an error if not successful:
 
-## DEMO
 A[2,3] = 2.0 # works because 2.0 is a Float64 that is exactly equal to an Int
 A[1,2] = 2.3 # fails since 2.3 is a Float64 that cannot be converted to an Int
-## END
 
 
 # ------
@@ -538,30 +521,24 @@ Matrix((1:5)')
 # moving along the row.
 # Here is a simple example:
 
-## DEMO
 A = [1+im  2  3;
      4     5  6;
      6     8  9]
 
 A' # adjoint (conjugate-transpose). If entries are real it is equivalent to transpose(A)
-## END
 
 # If we change entries of `A'` it actually changes entries of `A` too since
 # they are pointing to the same locations in memory, just interpreting the data differently:
 
-## DEMO
 A'[1,2] = 2+im
 A # A[2,1] is now 2-im
-## END
 
 # Note vector adjoints/transposes behave differently than 1 × n matrices: they are
 # more like row-vectors. For example the following computes the dot product of two vectors:
 
-## DEMO
 x = [1,2,3]
 y = [4,5,6]
 x'y # equivalent to dot(x,y), i.e. the standard dot product.
-## END
 
 # #### Broadcasting
 
@@ -570,10 +547,8 @@ x'y # equivalent to dot(x,y), i.e. the standard dot product.
 # By adding `.` to the end of a function we "broadcast" the function over
 # a vector:
 
-## DEMO
 x = [1,2,3]
 cos.(x) # equivalent to [cos(1), cos(2), cos(3)], or can be written broadcast(cos, x)
-## END
 
 # Broadcasting has some interesting behaviour for matrices.
 # If one dimension of a matrix (or vector) is `1`, it automatically
@@ -581,17 +556,15 @@ cos.(x) # equivalent to [cos(1), cos(2), cos(3)], or can be written broadcast(co
 # In the following we use broadcasting to pointwise-multiply a column and row
 # vector to make a matrix:
 
-## DEMO
 a = [1,2,3]
 b = [4,5]
 
 a .* b'
-## END
 
 # Since `size([1,2,3],2) == 1` it repeats the same vector to match the size
 # `size([4,5]',2) == 2`. Similarly, `[4,5]'` is repeated 3 times. So the
 # above is equivalent to:
-## DEMO
+
 A = [1 1;
      2 2;
      3 3] # same as [a a], i.e. repeat the vector a in each column
@@ -600,13 +573,11 @@ B = [4 5;
      4 5] # same as [b'; b' b'], i.e. repeat the row vector b' in each row
 
 A .* B # equals the above a .* b'
-## END
 
 # Note we can also use matrix broadcasting with our own functions:
-## DEMO
+
 f = (x,y) -> cos(x + 2y)
 f.(a, b') # makes a matrix with entries [f(1,4) f(1,5); f(2,4) f(2,5); f(3,4) f(3.5)]
-## END
 
 
 # #### Ranges
@@ -615,26 +586,22 @@ f.(a, b') # makes a matrix with entries [f(1,4) f(1,5); f(2,4) f(2,5); f(3,4) f(
 # actually created in memory.
 # We have already seen that we can represent a range of integers via `a:b`. Note we can
 # convert it to a `Vector` as follows:
-## DEMO
+
 Vector(2:6)
-## END
 
 # We can also specify a step:
-## DEMO
+
 Vector(2:2:6), Vector(6:-1:2)
-## END
 
 # Finally, the `range` function gives more functionality, for example, we can create 4 evenly
 # spaced points between `-1` and `1`:
-## DEMO
+
 Vector(range(-1, 1; length=4))
-## END
 
 # Note that `Vector` is mutable but a range is not:
-## DEMO
+
 r = 2:6
 r[2] = 3   # Not allowed
-## END
 
 # Both ranges `Vector` are subtypes of `AbstractVector`, whilst `Matrix` is a subtype of `AbstractMatrix`.
 
@@ -673,15 +640,14 @@ broadcast(k -> exp(-k), 1:5)
 # to the first memory address and a length. A `Matrix` is also stored consecutively in memory
 #  going down column-by-
 # column (_column-major_). That is,
-## DEMO
+
 A = [1 2;
      3 4;
      5 6]
-## END
+
 # Is actually stored equivalently to a length `6` vector `[A[1,1],A[2,1],A[3,1],A[1,2],A[2,2],A[3,2]]`:
-## DEMO
+
 vec(A)
-## END
 
 # which in this case would be stored using `8 * 6 = 48` consecutive bytes.
 # Behind the scenes, a matrix is also "pointer" to the location of the first entry alongside two integers
@@ -689,15 +655,14 @@ vec(A)
 
 
 # Matrix-vector multiplication works as expected because `*` is overloaded:
-## DEMO
+
 x = [7, 8]
 A * x
-## END
 
 
 # We can implement our own version for any types that support `*` and `+` but there are
 # actually two different ways. The most natural mathematical way is to multiply-by-rows:
-## DEMO
+
 function mul_rows(A, x)
     m,n = size(A)
     ## promote_type type finds a type that is compatible with both types, eltype gives the type of the elements of a vector / matrix
@@ -710,11 +675,10 @@ function mul_rows(A, x)
     end
     c
 end
-## END
 
 
 # But we can also change the order of operations to give an alternative approach that is multiply-by-columns:
-## DEMO
+
 function mul_cols(A, x)
     m,n = size(A)
     ## promote_type type finds a type that is compatible with both types, eltype gives the type of the elements of a vector / matrix
@@ -727,20 +691,18 @@ function mul_cols(A, x)
     end
     c
 end
-## END
 
 
 # Both implementations match _exactly_ for integer inputs:
-## DEMO
+
 mul_rows(A, x), mul_cols(A, x) # also matches `A*x`
-## END
 
 
 # Either implementation will be $O(mn)$ operations. However, the implementation
 # `mul_cols` accesses the entries of `A` going down the column,
 # which happens to be _significantly faster_ than `mul_rows`, due to accessing
 # memory of `A` in order. We can see this by measuring the time it takes using `@btime`:
-## DEMO
+
 n = 1000
 A = randn(n,n) # create n x n matrix with random normal entries
 x = randn(n) # create length n vector with random normal entries
@@ -749,7 +711,6 @@ using BenchmarkTools # load package for reliable timing
 @btime mul_rows(A,x)
 @btime mul_cols(A,x)
 @btime A*x; # built-in, high performance implementation. USE THIS in practice
-## END
 
 # Here `ms` means milliseconds (`0.001 = 10^(-3)` seconds) and `μs` means microseconds (`0.000001 = 10^(-6)` seconds).
 # On my machine we observe that `mul_cols` is roughly 2–3x faster than `mul_rows`, while the optimised `*` is roughly 5x faster than `mul_cols`.
@@ -761,16 +722,17 @@ using BenchmarkTools # load package for reliable timing
 
 # Note that the rules of floating point arithmetic apply here. Matrix multiplication with floats
 # will incur round-off error (the precise details of which are subject to the implementation):
-## DEMO
+
+
 A = [1.4 0.4;
      2.0 1/2]
 A * [1, -1] # First entry has round-off error, but 2nd entry is exact
-## END
+
 # And integer arithmetic will be subject to overflow:
-## DEMO
+
 A = fill(Int8(2^6), 2, 2) # make a matrix whose entries are all equal to 2^6
 A * Int8[1,1] # we have overflowed and get a negative number -2^7
-## END
+
 # Solving a linear system is done using `\`:
 
 A = [1 2 3;
@@ -792,26 +754,23 @@ A \ b
 
 # Triangular matrices are represented by dense square matrices where the entries below the
 # diagonal are ignored:
-## DEMO
+
 A = [1 2 3;
      4 5 6;
      7 8 9]
 L = LowerTriangular(A)
-## END
 
 # We can see that `L` is storing all the entries of `A` in a field called `data`:
-## DEMO
+
 L.data
-## END
 
 # Similarly we can create an upper triangular matrix by ignoring the entries below the diagonal:
-## DEMO
+
 U = UpperTriangular(A)
-## END
 
 # If we know a matrix is triangular we can do matrix-vector multiplication in roughly half
 # the number of operations by skipping over the entries we know are zero:
-## DEMO
+
 function mul_cols(L::LowerTriangular, x)
     n = size(L,1)
     ## promote_type type finds a type that is compatible with both types, eltype gives the type of the elements of a vector / matrix
@@ -825,7 +784,6 @@ function mul_cols(L::LowerTriangular, x)
     end
     b
 end
-## END
 
 x = [10, 11, 12]
 ## matches built-in * which also exploits the structure:
@@ -834,23 +792,21 @@ x = [10, 11, 12]
 
 # Moreover, we can easily invert matrices.
 # Consider a simple 3×3 example, which can be solved with `\`:
-## DEMO
+
 b = [5, 6, 7]
 x = L \ b # Excercise: why does this return a float vector?
-## END
 
 # Behind the scenes, `\` is doing forward-substitution.
 # We can implement our own version as follows:
 
 ## ldiv is our own version of \
-## DEMO
 function ldiv(L::LowerTriangular, b)
     n = size(L,1)
-    
+
     if length(b) != n
         error("The system is not compatible")
     end
-    
+
     x = zeros(n)  # the solution vector
     for k = 1:n  # start with k = 1
         r = b[k]  # dummy variable
@@ -862,8 +818,8 @@ function ldiv(L::LowerTriangular, b)
     x
 end
 
+
 @test ldiv(L, b) ≈ L\b
-## END
 
 
 
@@ -932,28 +888,30 @@ b = randn(5)
 
 
 # Diagonal matrices in Julia are stored as a vector containing the diagonal entries:
-## DEMO
+
 x = [1,2,3]
 D = Diagonal(x) # the type Diagonal has a single field: D.diag
-## END
+
 # It is clear that we can perform diagonal-vector multiplications and solve linear systems involving diagonal matrices efficiently
 # (in $O(n)$ operations).
 
 
 # We can create bidiagonal matrices in Julia by specifying the diagonal and off-diagonal:
-## DEMO
+
+
 L = Bidiagonal([1,2,3], [4,5], :L) # the type Bidiagonal has three fields: L.dv (diagonal), L.ev (lower-diagonal), L.uplo (either 'L', 'U')
 #
 U = Bidiagonal([1,2,3], [4,5], :U) # When U.uplo == 'U' it is interpreted as an upper bidiagonal matrix
-## END
+
+
 # Multiplication and solving linear systems with Bidiagonal systems is also $O(n)$ operations, using the standard
 # multiplications/back-substitution algorithms but being careful in the loops to only access the non-zero entries.
 
 
 # Julia has a type `Tridiagonal` for representing a tridiagonal matrix from its sub-diagonal, diagonal, and super-diagonal:
-## DEMO
+
 T = Tridiagonal([1,2], [3,4,5], [6,7]) # The type Tridiagonal has three fields: T.dl (sub), T.d (diag), T.du (super)
-## END
+
 # Tridiagonal matrices will come up in solving second-order differential equations and orthogonal polynomials.
 # We will later see how linear systems involving tridiagonal matrices can be solved in $O(n)$ operations.
 

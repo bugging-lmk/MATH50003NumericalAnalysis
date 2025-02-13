@@ -15,12 +15,12 @@ compilenotes("II.2.Arithmetic")
 compilenotes("II.3.Intervals")
 
 compilenotes("III.1.StructuredMatrices")
-# compilenotes("III.2.DifferentialEquations")
-# compilenotes("III.3.Cholesky")
-# compilenotes("III.4.Regression")
-# compilenotes("III.5.OrthogonalMatrices")
+compilenotes("III.2.Cholesky")
+compilenotes("III.3.OrthogonalMatrices")
 # compilenotes("III.6.QR")
 
+# compilenotes("III.4.Regression")
+# compilenotes("III.2.DifferentialEquations")
 # compilenotes("IV.1.Fourier")
 # compilenotes("IV.2.DFT")
 # compilenotes("IV.3.OrthogonalPolynomials")
@@ -37,19 +37,19 @@ compilenotes("A.Permutations")
 # Sheets
 ####
 
-for k = 1:3
+for k = 1:5
     compilesheet(k)
 end
 
 
-for k = 1:2
+for k = 1:3
     compilesheetsolution(k)
 end
 
 ####
 # Labs
 ####
-for k = 1:3
+for k = 1:5
     compilelab(k)
     compilelabdemo(k)
 end
@@ -59,7 +59,7 @@ end
 
 compilelabsolution(1)
 compilelabsolution(2)
-# compilelabsolution(3)
+compilelabsolution(3)
 # compilelabsolution(4)
 # compilelabsolution(5)
 # compilelabsolution(6)
