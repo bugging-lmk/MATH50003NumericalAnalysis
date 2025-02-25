@@ -157,43 +157,51 @@
 
 
 
-\textbf{Numerical Analysis MATH50003 (2024\ensuremath{\endash}25) Problem Sheet 6}
+\textbf{Numerical Analysis MATH50003 (2024\ensuremath{\endash}25) Problem Sheet 7}
 
-\textbf{Problem 1(a)} Show for a unitary matrix $Q \ensuremath{\in} U(n)$ and a vector $\ensuremath{\bm{\x}} \ensuremath{\in} \ensuremath{\bbC}^n$ that multiplication by $Q$ preserve the 2-norm: $\|Q \ensuremath{\bm{\x}}\| = \|\ensuremath{\bm{\x}}\|.$
+\textbf{Problem 1} Use Lagrange interpolation to interpolate the function $\cos x$ by a polynomial at the points $[0,2,3,4]$ and evaluate at $x = 1$.
 
-\textbf{Problem 1(b)} Show that the eigenvalues $\ensuremath{\lambda}$ of a unitary matrix $Q$ are on the unit circle: $|\ensuremath{\lambda}| = 1$. Hint: recall for any eigenvalue $\ensuremath{\lambda}$ that there exists a unit eigenvector $\ensuremath{\bm{\v}} \ensuremath{\in} \ensuremath{\bbC}^n$ (satisfying $\| \ensuremath{\bm{\v}} \| = 1$). 
+\textbf{Problem 2} Compute the LU factorisation of the following transposed Vandermonde matrices:
+\[
+\begin{bmatrix}
+1 & 1 \\
+x & y
+\end{bmatrix},
+\begin{bmatrix}
+1 & 1 & 1 \\
+x & y & z \\
+x^2 & y^2 & z^2
+\end{bmatrix},
+\begin{bmatrix}
+1 & 1 & 1 & 1 \\
+x & y & z & t \\
+x^2 & y^2 & z^2 & t^2 \\
+x^3 & y^3 & z^3 & t^3
+\end{bmatrix}
+\]
+Can you spot a pattern? Test your conjecture with a $5 \ensuremath{\times} 5$ Vandermonde matrix.
 
-\textbf{Problem 1(c)} Show for an orthogonal matrix $Q \ensuremath{\in} O(n)$ that $\det Q = \ensuremath{\pm}1$. Give an example of $Q \ensuremath{\in} U(n)$ such that $\det Q \ensuremath{\neq} \ensuremath{\pm}1$. Hint: recall for any real matrices $A$ and $B$ that $\det A = \det A^\ensuremath{\top}$ and $\det(AB) = \det A \det B$.
-
-\textbf{Problem 1(d)} A normal matrix commutes with its adjoint. Show that $Q \ensuremath{\in} U(n)$ is normal.
-
-\textbf{Problem 1(e)}  The spectral theorem states that any normal matrix is unitarily diagonalisable: if $A$ is normal then $A = V \ensuremath{\Lambda} V^\ensuremath{\star}$ where $V \ensuremath{\in} U(n)$ and $\ensuremath{\Lambda}$ is diagonal. Use this to show that  $Q \ensuremath{\in} U(n)$ is equal to $I$ if and only if all its eigenvalues are 1.
+\textbf{Problem 3} Compute the interpolatory quadrature rule
+\[
+\ensuremath{\int}_{-1}^1 f(x) w(x) \dx \ensuremath{\approx} \ensuremath{\sum}_{j=1}^n w_j f(x_j)
+\]
+for the points $[x_1,x_2,x_3] = [-1,1/2,1]$, for the weights $w(x) = 1$ and $w(x) = \sqrt{1-x^2}$.
 
 \rule{\textwidth}{1pt}
-\textbf{Problem 2} Consider the vectors
+\textbf{Problem 4} Derive  Backward Euler: use the left-sided divided difference approximation
 \[
-\ensuremath{\bm{\a}} = \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}\qquad\hbox{and}\qquad  \ensuremath{\bm{\b}} = \begin{bmatrix} 1 \\ 2{\rm i} \\ 2 \end{bmatrix}.
+u'(x) \ensuremath{\approx} {u(x) - u(x-h)  \over h}
 \]
-Use reflections to determine the entries of orthogonal/unitary matrices $Q_1, Q_2, Q_3$ such that
-\[
-Q_1 \ensuremath{\bm{\a}} = \begin{bmatrix} 3 \\ 0 \\ 0 \end{bmatrix}, Q_2 \ensuremath{\bm{\a}} = \begin{bmatrix} -3 \\ 0 \\ 0 \end{bmatrix},
-Q_3 \ensuremath{\bm{\b}} = \begin{bmatrix} -3 \\ 0 \\ 0 \end{bmatrix}
-\]
-\textbf{Problem 3} What simple rotation matrices $Q_1,Q_2 \ensuremath{\in} SO(2)$ have the property that:
-\[
-Q_1 \begin{bmatrix} 1 \\ 2 \end{bmatrix} =\begin{bmatrix} \sqrt{5} \\ 0 \end{bmatrix},  Q_2 \begin{bmatrix} \sqrt{5} \\ 2 \end{bmatrix} =  \begin{bmatrix} 3 \\ 0 \end{bmatrix}
-\]
-\rule{\textwidth}{1pt}
-\textbf{Problem 4} Use Householder reflections to compute QR and reduce QR factorisations of the matrix
-\[
-A = \begin{bmatrix} -1 & 2 \\ 
-2 & 4 \\ 
-2 & 3 \end{bmatrix}.
-\]
-\textbf{Problem 5(a)} Show that every matrix $A \ensuremath{\in} \ensuremath{\bbR}^{m \ensuremath{\times} n}$ has a  QR factorisation such that the diagonal of $R$ is non-negative. Make sure to include the case of more columns than rows (i.e. $m < n$). 
+to reduce the first order ODE
+\meeq{
+u(a) =  c, \qquad u'(x) + \ensuremath{\omega}(x) u(x) = f(x)
+}
+to a lower triangular system by discretising on the grid $x_j = a + j h$ for $h = (b-a)/n$. Hint: only impose the ODE on the gridpoints $x_1,\ensuremath{\ldots},x_n$ so that the divided difference does not depend on behaviour at $x_{-1}$.
 
-\textbf{Problem 5(b)} Show that the QR factorisation of a square invertible matrix $A \ensuremath{\in} \ensuremath{\bbR}^{n \ensuremath{\times} n}$ is unique, provided that the diagonal of $R$ is positive.
-
+\textbf{Problem 5} Reduce a Schrödinger equation to a tridiagonal linear system by discretising on the grid $x_j = a + j h$ for $h = (b-a)/n$:
+\meeq{
+u(a) =  c,\qquad u''(x) + V(x) u(x) = f(x), \qquad u(b) = d.
+}
 
 
 \end{document}
