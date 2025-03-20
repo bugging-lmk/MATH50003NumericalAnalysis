@@ -5,7 +5,7 @@ Lecturer: [Dr Sheehan Olver](https://www.ma.imperial.ac.uk/~solver/)
 
 Office hour: Thursdays, 16:00–17:00, Huxley 6M40
 
-## [Notes](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/raw/main/notes/notes.pdf) up to Week 9
+## [Notes](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/raw/main/notes/notes.pdf)
 
 ## Weekly Material
 
@@ -38,6 +38,9 @@ Submit labs/problem sheets to <a href="mailto:venkata.melanathuru19@imperial.ac.
 9. VI.1 General Orthogonal Polynomials and VI.2 Classical Orthogonal Polynomials
    - [Lab 9](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/labs/lab9.ipynb)
    - [Sheet 9](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/sheets/sheet9.pdf)   
+10. VI.3 Gaussian Quadrature
+   - [Lab 10](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/labs/lab10.ipynb)
+   - [Sheet 10](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/sheets/sheet10.pdf)   
 
 
 ## Revision
