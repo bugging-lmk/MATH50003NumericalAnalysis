@@ -79,7 +79,7 @@ it follows each root must be first order and hence distinct.
 
 ∎
 
-We ca relate these roots to eigenvalues of truncations of Jacobi matrices:
+We can relate these roots to eigenvalues of truncations of Jacobi matrices:
 
 **Definition (truncated Jacobi matrix)** Given a Jacobi matrix $J$
 associated with a family of orthonormal polynomials,
