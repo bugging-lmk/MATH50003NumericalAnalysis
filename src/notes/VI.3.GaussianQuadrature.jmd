@@ -13,7 +13,7 @@ an interpolatory quadrature rule:
 
 
 
-**Example (Chebyshev roots)** We  find the interpolatory quadrature rule for $w(x) = 1/\sqrt{1-x^2}$ on $[-1,1]$ with points equal to the
+**Example (Gauss-Chebyshev)** We  find the interpolatory quadrature rule for $w(x) = 1/\sqrt{1-x^2}$ on $[-1,1]$ with points equal to the
 roots of $T_3(x)$.
  This is a special case of Gaussian quadrature which we will approach in another way below. We use:
 $$
