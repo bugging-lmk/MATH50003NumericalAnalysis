@@ -46,7 +46,7 @@ Submit labs/problem sheets to <a href="mailto:venkata.melanathuru19@imperial.ac.
 ## Revision
 
 1. [Revision Lab](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/labs/labr.ipynb) ([Solution](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/labs/labrs.ipynb))
-2. [Revision Sheet](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/sheets/sheetr.pdf)
+2. [Revision Sheet](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/sheets/sheetr.pdf) ([Solution](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/sheets/sheetrs.pdf))
 
 
 ## Assessment
@@ -54,7 +54,7 @@ Submit labs/problem sheets to <a href="mailto:venkata.melanathuru19@imperial.ac.
 1. SEW familiarisation session: 7 March
 2. [Mock computer-based exam](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/exams/mockexam.ipynb) ([Solution](https://github.com/Imperial-MATH50003/MATH50003NumericalAnalysis/blob/main/exams/mockexams.ipynb))
 2. Computer-based exam: 14 March, 10:00–12:00 (1 hour exam)
-5. Final exam (pen-and-paper, 80% of term mark): TBA
+5. Final exam (pen-and-paper, 80% of term mark): 6 May, 10:00–13:00
 
 
 ## Reading List

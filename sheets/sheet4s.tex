@@ -210,7 +210,7 @@ Thus
 And hence
 \meeq{
 [1,1] \ensuremath{\ominus} ([1,1] \ensuremath{\oslash} 6) = [1,1] \ensuremath{\ominus} [(0.0010101010101)_2, (0.0010101010110)_2] \ccr
-= [{\rm fl}^{\rm down}(0.11010101010\magenta{10111111\ensuremath{\ldots}})_2, {\rm fl}^{\rm up}(0.11010101010\magenta{011111\ensuremath{\ldots}})_2] \ccr
+= [{\rm fl}^{\rm down}(0.11010101010\magenta{011111\ensuremath{\ldots}})_2, {\rm fl}^{\rm up}(0.11010101010\magenta{10111111\ensuremath{\ldots}})_2] \ccr
 = 2^{-1}[(1.1010101010)_2, (1.1010101011)_2] = [0.8330078125,0.83349609375]
 }
 \textbf{END}
@@ -244,9 +244,9 @@ You may use without proof that $1/120 = 2^{-7} (1.000100010001\ensuremath{\ldots
 Noting that in floating point $1 \ensuremath{\otimes} 1 = 1$ (ie it is exact) we compute
 \begin{align*}
 \sin 1 &\ensuremath{\in} [1,1] \ensuremath{\ominus} [1,1] \ensuremath{\oslash} 6 \ensuremath{\oplus} [{\rm fl}^{\rm down}(-1/120), {\rm fl}^{\rm up}(1/120)] \ccr
- = [(0.11010101010)_2, (0.11010101011)_2] \ensuremath{\oplus} [-(0.0000001000100010)_2, (0.00000010001000101)_2] \ccr
+ = [(0.11010101010)_2, (0.11010101011)_2] \ensuremath{\oplus} [-(0.00000010001000101)_2, (0.00000010001000101)_2] \ccr
   =
-[{\rm fl}^{\rm down}(0.11010011000\magenta{11101111\ensuremath{\ldots}})_2,
+[{\rm fl}^{\rm down}(0.11010011000\magenta{11101011\ensuremath{\ldots}})_2,
  {\rm fl}^{\rm up}(0.11010111100\magenta{000101})_2] \ccr
  = [(0.11010011000)_2, (0.11010111101)_2] = [0.82421875, 0.84228515625]
 \end{align*}
